@@ -1,1 +1,362 @@
-<h2>hello</h2>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+
+        //update this with your js_form selector
+        var form_id_js = "javascript_form";
+
+        var data_js = {
+            "access_token": "22ojh4uml7qpnt474ueiermc"
+        };
+
+        function js_onSuccess() {
+            // remove this to avoid redirect
+            window.location = window.location.pathname + "?message=Email+Successfully+Sent%21&isError=0";
+        }
+
+        function js_onError(error) {
+            // remove this to avoid redirect
+            window.location = window.location.pathname + "?message=Email+could+not+be+sent.&isError=1";
+        }
+
+        var sendButton = document.getElementById("js_send");
+
+        function js_send() {
+
+            //sendButton.value = 'Sending…';
+            //sendButton.disabled = true;
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    js_onSuccess();
+                } else
+                    if (request.readyState == 4) {
+                        js_onError(request.response);
+                    }
+            };
+
+            var subject = "segundo teste"; // document.querySelector("#" + form_id_js + " [name='subject']").value;
+            var message = "boa funciona"; // document.querySelector("#" + form_id_js + " [name='text']").value;
+            data_js['subject'] = subject;
+            data_js['text'] = message;
+            var params = toParams(data_js);
+
+            request.open("POST", "https://postmail.invotes.com/send", true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            request.send(params);
+
+            return false;
+        }
+
+        function toParams(data_js) {
+            var form_data = [];
+            for (var key in data_js) {
+                form_data.push(encodeURIComponent(key) + "=" + encodeURIComponent(data_js[key]));
+            }
+
+            return form_data.join("&");
+        }
+
+        //var js_form = document.getElementById(form_id_js);
+        //js_form.addEventListener("submit", function (e) {
+        //    e.preventDefault();
+        //});
+
+    </script>
+    <style>
+        body, h1, h2, h3, h4, h5 {
+            font-family: "Poppins", sans-serif
+        }
+
+        body {
+            font-size: 16px;
+        }
+
+        .w3-half img {
+            margin-bottom: -6px;
+            margin-top: 16px;
+            opacity: 0.8;
+            cursor: pointer
+        }
+
+            .w3-half img:hover {
+                opacity: 1
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-blue w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar">
+        <br>
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+        <div class="w3-container">
+            <h3 class="w3-padding-64"><b>Clinica Dentária<br>EasyDente</b></h3>
+        </div>
+        <div class="w3-bar-block">
+            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a>
+            <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Apresentação</a>
+            <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Serviços</a>
+            <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Equipa</a>
+            <a href="#packages" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Planos</a>
+            <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Top menu on small screens -->
+    <header class="w3-container w3-top w3-hide-large w3-blue w3-xlarge w3-padding">
+        <a href="javascript:void(0)" class="w3-button w3-blue w3-margin-right" onclick="w3_open()">☰</a>
+        <span>Clinica dentária EasyDente</span>
+    </header>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+        <input type="text" name="subject" placeholder="Subject" />
+        <textarea name="text" placeholder="Message"></textarea>
+        <button id="js_send" onclick="js_send()">Send</button>
+
+        <!-- Header -->
+        <div class="w3-container" style="margin-top:0px" id="showcase">
+            <img src="images/principal4.jpg" style="width:100%">
+            <div class="w3-row">
+                <div class="w3-col m10 l10">
+                    <h1 class="w3-jumbo"><b>O seu sorriso é a nossa missão.</b></h1>
+                </div>
+                <div class="w3-col m2 l2">
+                    <p><button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-yellow w3-round">Marcação Online</button></p>
+                </div>
+            </div>
+            <h1 class="w3-xxxlarge w3-text-blue"><b>Apresentação.</b></h1>
+            <hr style="width:50px;border:5px solid blue" class="w3-round">
+        </div>
+
+        <!-- Photo grid (modal) -->
+        <div class="w3-row-padding">
+            <div class="w3-half">
+                <img src="images/apresentacao2.jpg" style="width:100%" onclick="onClick(this)" alt="Concrete meets bricks">
+                <img src="images/apresentacao2.jpg" style="width:100%" onclick="onClick(this)" alt="Light, white and tight scandinavian design">
+                <img src="images/apresentacao2.jpg" style="width:100%" onclick="onClick(this)" alt="White walls with designer chairs">
+            </div>
+
+            <div class="w3-half">
+                <img src="images/apresentacao1.jpg" style="width:100%" onclick="onClick(this)" alt="Windows for the atrium">
+                <img src="images/apresentacao1.jpg" style="width:100%" onclick="onClick(this)" alt="Bedroom and office in one space">
+                <img src="images/apresentacao1.jpg" style="width:100%" onclick="onClick(this)" alt="Scandinavian design">
+            </div>
+        </div>
+
+        <!-- Modal for full size images on click-->
+        <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+            <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+            <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+                <img id="img01" class="w3-image">
+                <p id="caption"></p>
+            </div>
+        </div>
+
+        <!-- Services -->
+        <div class="w3-container" id="services" style="margin-top:75px">
+            <h1 class="w3-xxxlarge w3-text-blue"><b>Serviços.</b></h1>
+            <hr style="width:50px;border:5px solid blue" class="w3-round">
+            <p>Somos um serviço de design de interiores focado no que é melhor para a sua casa e para si!</p>
+            <p>
+                Algum texto sobre nossos serviços - o que fazemos e o que oferecemos. Somos lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui oficia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+                incidente ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
+
+        <!-- Designers -->
+        <div class="w3-container" id="designers" style="margin-top:75px">
+            <h1 class="w3-xxxlarge w3-text-blue"><b>Equipa.</b></h1>
+            <hr style="width:50px;border:5px solid blue" class="w3-round">
+            <p>A melhor equipa do mundo.</p>
+            <p>
+                Somos lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p><b>Our designers are thoughtfully chosen</b>:</p>
+        </div>
+
+        <!-- The Team -->
+        <div class="w3-row-padding w3-grayscale">
+            <div class="w3-col m4 w3-margin-bottom">
+                <div class="w3-light-grey">
+                    <img src="/images/team2.jpg" alt="John" style="width:100%">
+                    <div class="w3-container">
+                        <h3>John Doe</h3>
+                        <p class="w3-opacity">CEO & Founder</p>
+                        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col m4 w3-margin-bottom">
+                <div class="w3-light-grey">
+                    <img src="/images/team1.jpg" alt="Jane" style="width:100%">
+                    <div class="w3-container">
+                        <h3>Jane Doe</h3>
+                        <p class="w3-opacity">Designer</p>
+                        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col m4 w3-margin-bottom">
+                <div class="w3-light-grey">
+                    <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
+                    <div class="w3-container">
+                        <h3>Mike Ross</h3>
+                        <p class="w3-opacity">Architect</p>
+                        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Packages / Pricing Tables -->
+        <div class="w3-container" id="packages" style="margin-top:75px">
+            <h1 class="w3-xxxlarge w3-text-blue"><b>Planos.</b></h1>
+            <hr style="width:50px;border:5px solid blue" class="w3-round">
+            <p>Algum texto nossos preços. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
+        </div>
+
+        <div class="w3-row-padding">
+            <div class="w3-half w3-margin-bottom">
+                <ul class="w3-ul w3-light-grey w3-center">
+                    <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
+                    <li class="w3-padding-16">Floorplanning</li>
+                    <li class="w3-padding-16">10 hours support</li>
+                    <li class="w3-padding-16">Photography</li>
+                    <li class="w3-padding-16">20% furniture discount</li>
+                    <li class="w3-padding-16">Good deals</li>
+                    <li class="w3-padding-16">
+                        <h2>$ 199</h2>
+                        <span class="w3-opacity">per room</span>
+                    </li>
+                    <li class="w3-light-grey w3-padding-24">
+                        <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w3-half">
+                <ul class="w3-ul w3-light-grey w3-center">
+                    <li class="w3-red w3-xlarge w3-padding-32">Pro</li>
+                    <li class="w3-padding-16">Floorplanning</li>
+                    <li class="w3-padding-16">50 hours support</li>
+                    <li class="w3-padding-16">Photography</li>
+                    <li class="w3-padding-16">50% furniture discount</li>
+                    <li class="w3-padding-16">GREAT deals</li>
+                    <li class="w3-padding-16">
+                        <h2>$ 249</h2>
+                        <span class="w3-opacity">per room</span>
+                    </li>
+                    <li class="w3-light-grey w3-padding-24">
+                        <button class="w3-button w3-red w3-padding-large w3-hover-black">Sign Up</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Contacto -->
+        <div class="w3-container" id="contact" style="margin-top:75px">
+            <h1 class="w3-xxxlarge w3-text-blue"><b>Contacto.</b></h1>
+            <hr style="width:50px;border:5px solid blue" class="w3-round">
+
+            <div class="w3-section">
+                <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Av. 25 de Abril 29, 1675-155 Lisboa</p>
+                <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Telefone: +351 214 782 497</p>
+                <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: easydente@gmail.com</p>
+                <p><a href="https://www.facebook.com/EasyDente-109066661716111" target="_blank"><i class="fa fa-facebook-square fa-fw w3-xxlarge w3-margin-right"></i>Siga-nos no facebook</a></p>
+
+            </div>
+
+            <br>
+
+            <p>Quer que estilizemos sua casa? Preencha o formulário e me preencha com os detalhes :) Adoramos conhecer novas pessoas!</p>
+            <form target="_blank">
+                <div class="w3-section">
+                    <label>Nome</label>
+                    <input class="w3-input w3-border" type="text" name="Name" required>
+                </div>
+                <div class="w3-section">
+                    <label>Email</label>
+                    <input class="w3-input w3-border" type="text" name="Email" required>
+                </div>
+                <div class="w3-section">
+                    <label>Mensagem</label>
+                    <input class="w3-input w3-border" type="text" name="Message" required>
+                </div>
+                <button class="w3-button w3-block w3-padding-large w3-blue w3-margin-bottom" onclick="sendEmail()">Enviar Mensagem</button>
+            </form>
+        </div>
+
+        <!-- Nodal -->
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+                <div class="w3-center">
+                    <br>
+                    <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                    <h1>Entraremos em contacto consigo o mais breve possivél</h1>
+                </div>
+
+                <form class="w3-container">
+                    <div class="w3-section">
+                        <label><b>Nome</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="digite o nome" name="name" required>
+                        <label><b>Email</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="digite o Email" name="email" required>
+                        <label><b>Telefone</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="digite o telefone" name="phone" required>
+                        <button class="w3-button w3-block w3-grey w3-section w3-padding" type="submit">Submeter</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- End page content -->
+    </div>
+
+    <!-- W3.CSS Container -->
+    <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">Maistec</a></p></div>
+
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+    </script>
+
+</body>
+</html>
